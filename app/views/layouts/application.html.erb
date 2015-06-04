@@ -9,9 +9,9 @@
 <body>
 
   <ul>
-    <li><%= link_to "Home", welcome_index_path %></li>
+    <li><%= link_to "Bearded Bear Tracks", root_path %></li>
     <li><%= link_to "About", welcome_about_path %></li>
-  
+    <li><%= link_to "Topics", topics_path %></li>
       <% if current_user %>
         Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
