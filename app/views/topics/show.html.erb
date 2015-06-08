@@ -1,0 +1,7 @@
+<h1><%= @topic.title %></h1>
+
+<%= link_to "New Topic", new_topic_path(@topic) %>
+
+<%= link_to "Delete Topic", @topic, method: :delete, data: { confirm: 'Are you sure you want to delete this topic?' } %> 
+
+
