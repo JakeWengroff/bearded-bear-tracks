@@ -3,8 +3,7 @@
   <p><%= link_to topic.title, topic %></p>
 <% end %>
 
-<%= link_to "New Topic", new_topic_path(@topic) %>
+<%= link_to "New Topic", new_topic_path(@topic), class: 'button' %>
 
-<%= link_to "Delete Topic", @topic, method: :delete, data: { confirm: 'Are you sure you want to delete this topic?' } %> 
 
 
