@@ -39,6 +39,9 @@ GEM
     addressable (2.3.8)
     arel (6.0.0)
     bcrypt (3.1.10)
+    bourbon (4.2.3)
+      sass (~> 3.4)
+      thor
     builder (3.2.2)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -190,6 +193,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bourbon
   capybara (~> 2.1.0)
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.0.1)

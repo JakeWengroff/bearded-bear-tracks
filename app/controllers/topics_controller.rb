@@ -23,10 +23,18 @@ class TopicsController < ApplicationController
   end
 
   def edit
+     @topic = Topic.find(params[:id])
   end
 
-  def update
-  end
+   def update
+     @topic = Topic.find(params[:id])
+     if @topic.update_attributes(params.require(:topic).permit(:title))
+       redirect_to @topic
+     else
+       flash[:error] = "Error saving topic. Please try again."
+       render :edit
+     end
+   end
 
   def destroy
     @topic = Topic.find(params[:id])

@@ -1,8 +1,13 @@
 @import "bourbon";
 @import "base/base";
 
-button {
-  @include button(pill);
+#{$all-buttons-focus},
+#{$all-buttons-hover} {
+  background-color: #0f0;
+}
+
+.button {
+  @include button;
 }  
 
 
