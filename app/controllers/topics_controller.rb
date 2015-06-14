@@ -1,10 +1,12 @@
 class TopicsController < ApplicationController
   def index
     @topics = Topic.all
+    @topic = Topic.new
   end
 
   def show
-    @topic = Topic.find(params[:id])
+    @bookmark = Bookmark.new
+    @bookmarks = @topic.bookmarks.all
   end
 
   def new
@@ -12,7 +14,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new(params.require(:topic).permit(:title))
+    @topic = Topic.new(topic_params)
     if @topic.save
       flash[:notice] = "Topic was successfully saved."
       redirect_to @topic
@@ -28,7 +30,7 @@ class TopicsController < ApplicationController
 
    def update
      @topic = Topic.find(params[:id])
-     if @topic.update_attributes(params.require(:topic).permit(:title))
+     if @topic.update_attributes(topic_params)
        redirect_to @topic
      else
        flash[:error] = "Error saving topic. Please try again."
@@ -38,7 +40,6 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:id])
- 
     if @topic.destroy
       flash[:notice] = "\"#{@topic.title}\" was deleted successfully."
       redirect_to topics_path
@@ -47,5 +48,12 @@ class TopicsController < ApplicationController
       render :show
     end
   end
+
+  private
+
+  def topic_params
+    params.require(:topic).permit(:title)
+  end
+
 
 end

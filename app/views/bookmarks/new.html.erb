@@ -1,0 +1,9 @@
+<%= form_for @bookmark do |f| %>
+  <%= f.text_field :url %>
+
+  <%= f.submit "Save", class: 'button' %>
+<% end %>
+
+
+<%= link_to "Cancel", bookmarks_path, class: 'button' %>
+
