@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Blocmarks</title>
+  <%= favicon_link_tag 'bear.ico' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -12,7 +13,7 @@
     <li><%= link_to "Bearded Bear Tracks", root_path %></li>
     <li><%= link_to "About", welcome_about_path %></li>
     <li><%= link_to "Topics", topics_path %></li>
-    <li><%= link_to "Bookmarks", bookmarks_path %></li>
+    <li><%#= link_to "Bookmarks", bookmarks_path %></li>
   
       <% if current_user %>
         Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
