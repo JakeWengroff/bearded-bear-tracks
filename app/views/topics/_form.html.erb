@@ -9,7 +9,7 @@
        </ul>
      </div>
    <% end %>
-   <%= form_group_tag(topic.errors[:name]) do %>
+   <%= form_group_tag(topic.errors[:title]) do %>
      <%= f.label :title%>
      <%= f.text_field :title, class: 'form-control', placeholder: "Enter topic name" %>
    <% end %>
