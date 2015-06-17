@@ -3,12 +3,19 @@ class BookmarksController < ApplicationController
     @bookmarks = Bookmark.all
   end
 
+  def show  
+    @topic = Topic.find(params[:id])
+    @bookmarks = @topic.bookmarks
+  end
+
   def new
+    @topic = Topic.find(params[:topic_id])
     @bookmark = Bookmark.new
   end
   
   def create
-    @bookmark = @topic.bookmarks.build(bookmark_params)
+    @topic = Topic.find(params[:topic_id])
+    @bookmark = @topic.bookmarks.new(bookmark_params)
     @bookmark.user = User.find(current_user.id)
     if @bookmark.save
       flash[:notice] = "Bookmark was successfully saved."
@@ -40,7 +47,8 @@ class BookmarksController < ApplicationController
       redirect_to user_path(@user)
       flash[:notice] = "Bookmark successfully removed."
     else
-      flash.now[:error] = "Error deleting Bookmark. Please try again."
+      flash[:error] = "Error deleting Bookmark. Please try again."
+      render :show
     end
   end
 

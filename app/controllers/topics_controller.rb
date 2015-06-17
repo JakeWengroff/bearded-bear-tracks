@@ -4,9 +4,9 @@ class TopicsController < ApplicationController
     @topic = Topic.new
   end
 
-  def show
-    @bookmark = Bookmark.new
-    @bookmarks = @topic.bookmarks.all
+  def show  
+    @topic = Topic.find(params[:id])
+    @bookmarks = @topic.bookmarks
   end
 
   def new
@@ -31,6 +31,7 @@ class TopicsController < ApplicationController
    def update
      @topic = Topic.find(params[:id])
      if @topic.update_attributes(topic_params)
+       flash[:notice] = "Topic was successfully renamed."
        redirect_to @topic
      else
        flash[:error] = "Error saving topic. Please try again."
