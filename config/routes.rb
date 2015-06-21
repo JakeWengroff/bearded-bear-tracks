@@ -10,8 +10,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:update, :show, :index]
   
-  resources :topics do
-    resources :bookmarks, except: [:index]
-  end
+  resources :bookmarks, only: [:index]
 
+  resources :topics do
+    resources :bookmarks, shallow: true, except: [:index] 
+  end
 end

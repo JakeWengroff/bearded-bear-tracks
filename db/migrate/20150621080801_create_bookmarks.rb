@@ -2,10 +2,12 @@ class CreateBookmarks < ActiveRecord::Migration
   def change
     create_table :bookmarks do |t|
       t.string :url
-      t.references :topic, index: true
+      t.integer :user_id
+      t.integer :topic_id
 
       t.timestamps null: false
     end
-    add_foreign_key :bookmarks, :topics
+    add_index :bookmarks, :user_id
+    add_index :bookmarks, :topic_id
   end
 end

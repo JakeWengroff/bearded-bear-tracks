@@ -24,7 +24,7 @@ users = User.all
 20.times do
  topic = Topic.create!(
    user:   users.sample,
-   title:  "Cool Topic!"
+   title:  Faker::Lorem.word
  )
 end
 topics = Topic.all
@@ -32,7 +32,7 @@ topics = Topic.all
 60.times do
  bookmark = Bookmark.create!(
    topic:   topics.sample,
-   url:   Faker::Internet.url
+   url:   Faker::Internet.domain_name
  )
 end
 

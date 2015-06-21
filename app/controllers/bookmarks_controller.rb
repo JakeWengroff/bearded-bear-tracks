@@ -1,53 +1,70 @@
 class BookmarksController < ApplicationController
+  before_filter :load_topics
+  before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
+
   def index
-    @bookmarks = Bookmark.all
+    @bookmarks = @topic.present? ? @topic.bookmarks : Bookmark.all
+  end
+
+  def show
   end
 
   def new
-    @bookmark = Bookmark.new
+    @topic = Topic.find(params[:topic_id])
+    @bookmark = @topic.bookmarks.build
   end
-  
+
+  def edit
+  end
+
+
   def create
+    @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.build(bookmark_params)
-    @bookmark.user = User.find(current_user.id)
-    if @bookmark.save
-      flash[:notice] = "Bookmark was successfully saved."
-      redirect_to @bookmark
-    else
-      flash[:error] = "There was an error saving the bookmark. Please try again."
-      render :new
+
+    respond_to do |format|
+      if @bookmark.save
+        format.html { redirect_to @topic, notice: 'Bookmark was successfully created.' }
+        format.json { render :show, status: :created, location: @bookmark }
+      else
+        format.html { render :new }
+        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+      end
     end
   end
-  
-  def edit
-    @bookmark = Bookmark.find(params[:id])
-  end
-  
+
   def update
-    @bookmark = Bookmark.find(params[:id])
-    if @bookmark.update_attributes(bookmark_params)
-       redirect_to @bookmark
-     else
-       flash[:error] = "Error saving bookmark. Please try again."
-       render :edit
-     end
+    @topic = @bookmark.topic
+
+    respond_to do |format|
+      if @bookmark.update(bookmark_params)
+        format.html { redirect_to @topic, notice: 'Bookmark was successfully updated.' }
+        format.json { render :show, status: :ok, location: @bookmark }
+      else
+        format.html { render :edit }
+        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+      end
+    end
   end
-  
+
   def destroy
-    @bookmark = Bookmark.find(params[:id])
-    @user = @bookmark.user
-    if @bookmark.destroy
-      redirect_to user_path(@user)
-      flash[:notice] = "Bookmark successfully removed."
-    else
-      flash.now[:error] = "Error deleting Bookmark. Please try again."
+    @bookmark.destroy
+    respond_to do |format|
+      format.html { redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
   private
+    def set_bookmark
+      @bookmark = Bookmark.find(params[:id])
+    end
 
-  def bookmark_params
-    params.require(:bookmark).permit(:url)
-  end
+    def load_topics
+      @topic = Topic.find(params[:topic_id]) if params[:topic_id].present?
+    end
 
+    def bookmark_params
+      params.require(:bookmark).permit(:url, :user_id, :topic_id)
+    end
 end
