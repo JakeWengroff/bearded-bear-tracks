@@ -31,6 +31,7 @@ class TopicsController < ApplicationController
    def update
      @topic = Topic.find(params[:id])
      if @topic.update_attributes(topic_params)
+       flash[:notice] = "Topic was successfully renamed."
        redirect_to @topic
      else
        flash[:error] = "Error saving topic. Please try again."

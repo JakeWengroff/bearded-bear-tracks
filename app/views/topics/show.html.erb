@@ -22,8 +22,11 @@
       <tr>
         <td><%= bookmark.url %></td>
         <td><%= link_to 'Show', bookmark %></td>
+        
         <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
+        
         <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +34,6 @@
 
 <br>
 
+<% if policy(Bookmark.new).create? %>
 <%= link_to 'New Bookmark', new_topic_bookmark_path(@topic), class: 'button' %>
+<% end %>

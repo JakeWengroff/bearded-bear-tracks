@@ -4,6 +4,7 @@ class BookmarksController < ApplicationController
 
   def index
     @bookmarks = @topic.present? ? @topic.bookmarks : Bookmark.all
+    authorize @bookmarks
   end
 
   def show
@@ -12,15 +13,18 @@ class BookmarksController < ApplicationController
   def new
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.build
+    authorize @bookmark
   end
 
   def edit
+    authorize @bookmark
   end
 
 
   def create
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.build(bookmark_params)
+    authorize @bookmark
 
     respond_to do |format|
       if @bookmark.save
@@ -35,6 +39,7 @@ class BookmarksController < ApplicationController
 
   def update
     @topic = @bookmark.topic
+    authorize @bookmark
 
     respond_to do |format|
       if @bookmark.update(bookmark_params)
@@ -48,6 +53,7 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
+    authorize @bookmark
     @bookmark.destroy
     respond_to do |format|
       format.html { redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.' }

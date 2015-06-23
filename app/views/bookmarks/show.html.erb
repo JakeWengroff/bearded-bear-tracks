@@ -5,5 +5,8 @@
   <%= @bookmark.url %>
 </p>
 
+<% if policy(@bookmark).edit? %>
 <%= link_to 'Edit', edit_bookmark_path(@bookmark) %> 
+<% end %>
+
 
