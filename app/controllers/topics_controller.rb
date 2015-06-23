@@ -4,15 +4,9 @@ class TopicsController < ApplicationController
     @topic = Topic.new
   end
 
-<<<<<<< HEAD
-  def show  
-    @topic = Topic.find(params[:id])
-    @bookmarks = @topic.bookmarks
-=======
   def show
     @topic = Topic.find(params[:id])
     @bookmarks = @topic.bookmarks.all
->>>>>>> df96936d4718ad4eb32f3828935750e97962391e
   end
 
   def new

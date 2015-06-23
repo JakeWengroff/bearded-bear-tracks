@@ -2,29 +2,6 @@ require 'spec_helper'
 
 RSpec.describe BookmarksController, type: :controller do
 
-<<<<<<< HEAD
-  describe "GET #index" do
-    it "responds successfully with an HTTP 200 status code" do
-      get :index
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
-    end
-  end
-
-  describe "GET #new" do
-    it "responds successfully with an HTTP 200 status code" do
-      get :new
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
-    end
-  end
-
-  describe "GET #edit" do
-    it "responds successfully with an HTTP 200 status code" do
-      get :edit
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
-=======
   before { User.delete_all }
   before { Bookmark.delete_all }
 
@@ -64,7 +41,6 @@ RSpec.describe BookmarksController, type: :controller do
     it "shows an index of bookmarks" do
       get :index 
       response.should be_success
->>>>>>> df96936d4718ad4eb32f3828935750e97962391e
     end
   end
 

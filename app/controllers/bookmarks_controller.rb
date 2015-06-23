@@ -4,42 +4,27 @@ class BookmarksController < ApplicationController
 
   def index
     @bookmarks = @topic.present? ? @topic.bookmarks : Bookmark.all
+    authorize @bookmarks
   end
 
   def show
   end
 
-  def show  
-    @topic = Topic.find(params[:id])
-    @bookmarks = @topic.bookmarks
-  end
-
   def new
     @topic = Topic.find(params[:topic_id])
-<<<<<<< HEAD
-    @bookmark = Bookmark.new
-=======
     @bookmark = @topic.bookmarks.build
+    authorize @bookmark
   end
 
   def edit
->>>>>>> df96936d4718ad4eb32f3828935750e97962391e
+    authorize @bookmark
   end
 
 
   def create
     @topic = Topic.find(params[:topic_id])
-<<<<<<< HEAD
-    @bookmark = @topic.bookmarks.new(bookmark_params)
-    @bookmark.user = User.find(current_user.id)
-    if @bookmark.save
-      flash[:notice] = "Bookmark was successfully saved."
-      redirect_to @bookmark
-    else
-      flash[:error] = "There was an error saving the bookmark. Please try again."
-      render :new
-=======
     @bookmark = @topic.bookmarks.build(bookmark_params)
+    authorize @bookmark
 
     respond_to do |format|
       if @bookmark.save
@@ -49,12 +34,12 @@ class BookmarksController < ApplicationController
         format.html { render :new }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
       end
->>>>>>> df96936d4718ad4eb32f3828935750e97962391e
     end
   end
 
   def update
     @topic = @bookmark.topic
+    authorize @bookmark
 
     respond_to do |format|
       if @bookmark.update(bookmark_params)
@@ -68,21 +53,11 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-<<<<<<< HEAD
-    @bookmark = Bookmark.find(params[:id])
-    @user = @bookmark.user
-    if @bookmark.destroy
-      redirect_to user_path(@user)
-      flash[:notice] = "Bookmark successfully removed."
-    else
-      flash[:error] = "Error deleting Bookmark. Please try again."
-      render :show
-=======
+    authorize @bookmark
     @bookmark.destroy
     respond_to do |format|
       format.html { redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.' }
       format.json { head :no_content }
->>>>>>> df96936d4718ad4eb32f3828935750e97962391e
     end
   end
 

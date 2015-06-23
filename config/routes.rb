@@ -8,15 +8,11 @@ Rails.application.routes.draw do
   
   post :incoming, to: 'incoming#create'
 
-  resources :users, only: [:update] 
+  resources :users, only: [:update, :show, :index] 
   
   resources :bookmarks, only: [:index]
 
   resources :topics do
-<<<<<<< HEAD
-    resources :bookmarks
-=======
     resources :bookmarks, shallow: true, except: [:index] 
->>>>>>> df96936d4718ad4eb32f3828935750e97962391e
   end
 end
