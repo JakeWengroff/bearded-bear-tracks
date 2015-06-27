@@ -1,11 +1,27 @@
-<%= form_for @topic do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<h1>New Topic</h1>
 
-  <%= f.submit "Save", class: 'button' %>
-<% end %>
+<div class="row">
+   <div class="col-md-4">
+     <p>Guidelines for Topics</p>
+     <ul>
+       <li>Make sure the topic is appropriate.</li>
+       <li>Never insult cats.</li>
+       <li>Be specific enough to invite inquiry.</li>
+     </ul>
+   </div>
+   <div class="col-md-8">
+     
+   <%= render partial: 'form', locals: { topic: @topic, bookmark: @bookmark } %>
 
 
-<%= link_to "Cancel", topics_path, class: 'button' %>
+   </div>
+ </div>
+
+
+
+
+
+
+
 
 
