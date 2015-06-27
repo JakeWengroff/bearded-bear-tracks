@@ -1,4 +1,6 @@
-<h1>All Topics</h1>
+<div class="container-fluid">
+  <h1>All Topics</h1>
+  
   <div class="row">
     <div class="col-md-8">
       <% @topics.each do |topic| %>
@@ -18,6 +20,6 @@
       <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
     </div>
   </div>
-
+</div>
 
 
