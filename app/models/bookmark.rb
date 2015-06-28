@@ -4,4 +4,6 @@ class Bookmark < ActiveRecord::Base
 
   validates_presence_of :topic
   validates_presence_of :url
+
+  has_many :likes, dependent: :destroy
 end
