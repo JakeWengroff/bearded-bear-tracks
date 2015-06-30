@@ -13,13 +13,9 @@ Rails.application.routes.draw do
   resources :bookmarks, only: [:index]
 
   resources :topics do
-<<<<<<< HEAD
-    resources :bookmarks, except: [:index]
-=======
     resources :bookmarks, shallow: true, except: [:index] do
       resources :likes, only: [:create, :destroy]
     end
->>>>>>> 92a72f27f048ff23fd4c2b995da069e63d3033f7
   end
 
   resources :bookmarks, except: [:index] do
