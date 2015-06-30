@@ -7,7 +7,7 @@ class LikesController < ApplicationController
     authorize like
     if like.save
     flash[:notice] = "Bookmark was liked."
-      redirect_to @topic
+      redirect_to @bookmark
     else
       flash[:error] = "There was an error liking the bookmark. Please try again."
       render :new
