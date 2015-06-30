@@ -47,7 +47,14 @@ end
 likes = Like.all
 
 puts "Seed finished"
+<<<<<<< HEAD
 puts "#{User.count} users created."
 puts "#{Topic.count} topics created."
 puts "#{Bookmark.count} bookmarks created."
 puts "#{{Like.count} likes created."
+=======
+puts "#{User.count} users created"
+puts "#{Topic.count} topics created"
+puts "#{Bookmark.count} bookmarks created"
+puts "#{Like.count} likes created"
+>>>>>>> 92a72f27f048ff23fd4c2b995da069e63d3033f7

@@ -27,5 +27,4 @@ class LikesController < ApplicationController
       render :show
     end
   end
-
 end
