@@ -27,6 +27,7 @@ users = User.all
    title:  Faker::Lorem.word
  )
 end
+
 topics = Topic.all
 
 60.times do
@@ -36,7 +37,18 @@ topics = Topic.all
  )
 end
 
+bookmarks = Bookmark.all
+
+30.times do
+  like = Like.create!(
+    user: users.sample,
+    bookmark: bookmarks.sample)
+end
+likes = Like.all
+
 puts "Seed finished"
-puts "#{User.count} users created"
-puts "#{Topic.count} topics created"
-puts "#{Bookmark.count} env bookmarks created"
+puts "#{User.count} users created."
+puts "#{Topic.count} topics created."
+puts "#{Bookmark.count} bookmarks created."
+puts "#{Like.count} likes created"
+
