@@ -45,7 +45,7 @@ RSpec.describe BookmarksController, type: :controller do
   end
 
   describe "deleting bookmarks" do
-    it "destroys the bookmark" do 
+    it "destroys the bookmark" do
       expect {
         delete :destroy, id: @bookmark
         }.to change(Bookmark, :count).by(-1)

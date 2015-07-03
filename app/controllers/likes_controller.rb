@@ -20,7 +20,7 @@ class LikesController < ApplicationController
     
     authorize like
     if like.destroy
-      flash[:notice] = "Bookmark was successfully unliked."
+      flash[:notice] = "Bookmark was unliked."
       redirect_to topics_path
     else
       flash[:error] = "There was an error unliking the bookmark."
