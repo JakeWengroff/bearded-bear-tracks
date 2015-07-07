@@ -7,8 +7,8 @@ class BookmarkPolicy < ApplicationPolicy
     user.present? && (record.user == user)
   end
 
-  def edit?
-    update?
+  def update?
+    create?
   end
 
   def destroy?
