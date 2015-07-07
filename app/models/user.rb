@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   def created_bookmarks
     bookmarks.includes(:topic)
   end
+
+  def liked_bookmarks
+    likes.includes(bookmark: :topic).map(&:bookmark)
+  end
 end
