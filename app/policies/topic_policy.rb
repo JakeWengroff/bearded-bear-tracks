@@ -1,4 +1,4 @@
-class BookmarkPolicy < ApplicationPolicy
+class TopicPolicy < ApplicationPolicy
   def index?
     true
   end
@@ -15,4 +15,3 @@ class BookmarkPolicy < ApplicationPolicy
     update?
   end
 end
-

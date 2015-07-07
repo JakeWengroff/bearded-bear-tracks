@@ -6,4 +6,7 @@ class Bookmark < ActiveRecord::Base
   validates_presence_of :url
 
   has_many :likes, dependent: :destroy
+
+  
+  scope :visible_to, -> (user) { user ? all : joins(:bookmark).where('bookmarks.public' => true) }
 end
