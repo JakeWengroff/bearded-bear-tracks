@@ -1,13 +1,13 @@
 <div class="container">
   <div class="span8 text-left">
     <h1>My Bearded Bear Tracks</h1>
-      <% @created_bookmarks.each do |bookmarks| %>
-        <%= render partial: 'users/user', locals: {bookmarks: bookmarks} %>
+      <% @created_bookmarks.each do |bookmark| %>
+        <p><%= bookmark.url %></p>
       <% end %>
 
     <h1>My Liked Bearded Bear Tracks</h1>
-      <% @liked_bookmarks.each do |bookmarks| %>
-        <%= render partial: 'users/user', locals: {bookmarks: bookmarks} %>
+      <% @liked_bookmarks.each do |bookmark| %>
+        <p><%= bookmark.url %></p>
       <% end %>
   </div>
 </div>
