@@ -20,5 +20,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
+
+
+
   
 end
