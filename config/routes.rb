@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   
   post :incoming, to: 'incoming#create'
 
-  resources :users, only: [:update, :show, :index] 
-  
+  resources :users, only: [:show] 
+
   resources :bookmarks, only: [:index]
 
   resources :topics do
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   resources :bookmarks, except: [:index] do
     resources :likes, only: [:create, :destroy]
   end
+
+
+
 
   
 end
