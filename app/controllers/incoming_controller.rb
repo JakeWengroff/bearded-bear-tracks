@@ -7,8 +7,6 @@ class IncomingController < ApplicationController
     @user = User.find_by(email: params[:sender])
     @topic = Topic.find_by(title: params[:subject])
 
-    @url = params["body-plain"]
-
     if @user.nil?
       @user = User.new(email: params[:sender], password: "temp0rary_passw0rd")
       @user.skip_confirmation!
@@ -19,7 +17,14 @@ class IncomingController < ApplicationController
       @topic = @user.topics.create(title: params[:subject])
     end
 
-    @bookmark = Bookmark.create_with(user_id: @user.id, topic_id: @topic.id, url: @url)
+    @bookmark = Bookmark.create_with(user_id: @user.id, topic_id: @topic.id, url: params["stripped-text"])
+    begin
+      @bookmark.save!
+    rescue => e
+      puts "-------Bookmark save error!--------"
+      puts @order
+      puts e
+    end
 
     head 200
   end
