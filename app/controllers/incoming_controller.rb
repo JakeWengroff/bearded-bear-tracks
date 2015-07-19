@@ -17,17 +17,7 @@ class IncomingController < ApplicationController
       @topic = @user.topics.create(title: params[:subject])
     end
 
-    @bookmark = Bookmark.create_with(user_id: @user.id, topic_id: @topic.id, url: params["stripped-text"])
-    begin
-      @bookmark.save!
-    rescue => e
-      puts "-------Bookmark save error!--------"
-      puts @bookmark
-      puts @user
-      puts @topic
-      puts params["stripped-text"]
-      puts e
-    end
+    @bookmark = @topic.bookmarks.create(user_id: @user.id, url: params["stripped-text"])
 
     head 200
   end
