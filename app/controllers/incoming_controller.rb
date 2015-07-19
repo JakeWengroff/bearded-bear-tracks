@@ -22,7 +22,10 @@ class IncomingController < ApplicationController
       @bookmark.save!
     rescue => e
       puts "-------Bookmark save error!--------"
-      puts @order
+      puts @bookmark
+      puts @user
+      puts @topic
+      puts params["stripped-text"]
       puts e
     end
 
