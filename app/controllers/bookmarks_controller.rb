@@ -1,4 +1,6 @@
 class BookmarksController < ApplicationController
+  before_action :authenticate_user!
+
   before_filter :load_topics
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
 
@@ -12,18 +14,14 @@ class BookmarksController < ApplicationController
 
   def new
     @topic = Topic.find(params[:topic_id])
-    @bookmark = @topic.bookmarks.build
+    @bookmark = Bookmark.new
     authorize @bookmark
   end
-
-  def edit
-    authorize @bookmark
-  end
-
 
   def create
     @topic = Topic.find(params[:topic_id])
-    @bookmark = @topic.bookmarks.build(bookmark_params)
+    @bookmark = @topic.bookmarks.new(bookmark_params)
+    @bookmark.user = current_user
     authorize @bookmark
 
     respond_to do |format|
@@ -35,6 +33,10 @@ class BookmarksController < ApplicationController
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def edit
+    authorize @bookmark
   end
 
   def update
